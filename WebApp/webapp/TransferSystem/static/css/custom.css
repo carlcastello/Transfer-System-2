@@ -1,0 +1,41 @@
+.user-btns{
+	margin-bottom: 10px
+}
+.user-btns .btn{
+	width: 130px;
+	margin-right: 10px; 
+
+}
+
+.yadcf-filter-reset-button{
+	display: none !important;
+}
+
+.filters {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.filters .row:first-child{
+	margin-bottom: 10px;
+}
+.filters .select2-container{
+	margin-left: -2px !important;
+}
+
+
+
+
+/* Search box for the Item */
+/*http://bootsnipp.com/snippets/featured/stylish-input-using-icon-font*/
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
