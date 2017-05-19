@@ -1,10 +1,11 @@
-.user-btns{
-	margin-bottom: 10px
-}
-.user-btns .btn{
-	width: 130px;
+.btn {
+	width: 130px !important;
 	margin-right: 10px; 
 
+}
+
+.text-right .btn:last-child {
+	margin-right: 0px !important;
 }
 
 .yadcf-filter-reset-button{
@@ -38,4 +39,32 @@
 .stylish-input-group button{
     border:0;
     background:transparent;
+}
+
+
+#yadcf-filter-wrapper--search_5 .yadcf-filter-wrapper,
+#yadcf-filter-wrapper--search_5 .yadcf-filter-wrapper-inner {
+	width: 100%;
+	border: none;
+	box-shadow: none;
+}
+
+#yadcf-filter-wrapper--search_5 .yadcf-filter-range-date {
+	width: 45% !important;
+	padding: 5px 5px;
+	border-radius: 4px; 
+	border: 1px solid #aaa;
+}
+
+#yadcf-filter-wrapper--search_5 .yadcf-filter-range-date-seperator {
+	margin: 0px !important;
+	display:inline-block;
+	width: 9%;
+}
+
+
+.article-form-group,
+.user-form-group,
+.date-form-group{
+	display: none;
 }

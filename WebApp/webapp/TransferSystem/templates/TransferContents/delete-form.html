@@ -1,0 +1,95 @@
+{% extends 'transfer-base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block main_content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        {% if type == 'user_deletion_form' %}
+            <h1 class="page-header">Are you sure you want to delete this user?</h1>
+        {% else %}
+            <h1 class="page-header">Are you sure you want to delete this Article?</h1>
+        {% endif %}
+    </div>
+<!-- /.col-lg-12 -->
+</div>
+
+{% if response %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert {{ response.0 }}">
+            {{ response.1 |safe  }}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="row">
+                    {% if type == 'user_deletion_form' %}
+                    <div class="col-xs-3">
+                        <i class="fa fa-user fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">{{ user.username }}</div>
+                        <div>{{ user.first_name }} {{ user.last_name }}</div>
+                    </div>
+                    {% else %}
+                    <div class="col-xs-3">
+                        <i class="fa fa-file-text-o fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="col-xs-9 text-left">
+                            <dl>
+                                <dt>Article Name</dt>
+                                <dd class="huge">{{ object.name }}</dd>
+                                <dt>Article Number:</dt>
+                                <dd>{{ object.id }}</dd>
+                                <dt>Description:</dt>
+                                <dd>{{ object.description }}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-xs-3 text-right">
+                             <dl>
+                                <dt>
+                                    Price:
+                                </dt>
+                                <dd class="huge">${{ object.price }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-xs-3">
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <form role="form" method="post">
+                        {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" value="delete">Delete</button>
+                            {% if type.0 == 'user_deletion_form' %}
+                                <a class="btn btn-default" href="{% url 'TransferSystem:registered-users' %}">Return</a>
+                            {% else %}
+                                <a class="btn btn-default" href="{% url 'TransferSystem:saved-articles' %}">Return</a>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

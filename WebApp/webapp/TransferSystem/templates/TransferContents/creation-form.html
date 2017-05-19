@@ -1,0 +1,52 @@
+{% extends 'transfer-base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block main_content %}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">{{ title }}</h1>
+    </div>
+<!-- /.col-lg-12 -->
+</div>
+
+{% if response %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert {{ response.0 }}">
+            {{ response.1 |safe  }}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-green">
+            <form role="form" method="post">
+            {% csrf_token %}
+                <div class="panel-body">
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
+                            {{ field.error }}
+                            {{ field|add_class:"form-control" }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="panel-footer text-right">
+                    <button type="submit" class="btn btn-success" value="save">Save</button>
+                    <a class="btn btn-default" href="{% url 'TransferSystem:registered-users' %}">Return</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

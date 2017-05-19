@@ -1,4 +1,4 @@
-{% extends 'TransferBase.html' %}
+{% extends 'transfer-base.html' %}
 {% load static %}
 
 {% block title %}Transfered Articles{% endblock %}
@@ -12,6 +12,8 @@
 <link href="{% static 'css/jquery.dataTables.yadcf.css' %}" rel="stylesheet">
 <!-- Select2 CSS -->
 <link href="{% static 'css/select2.min.css' %}" rel="stylesheet">
+
+<link href="{% static 'css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block main_content %}
@@ -19,17 +21,17 @@
     <div class="col-lg-12">
         <h1 class="page-header">Transfered Articles</h1>
     </div>
-<!-- /.col-lg-12 -->
 </div>
 
 <div class="row">
     <div class="col-lg-12">
         <p class="user-btns">
-            <a href="#" class="btn btn-primary">Transfer Article</a>
-            <a href="#" class="btn btn-info">Confirm Transfer</a>
+            <a href="{% url 'TransferSystem:transfer-article' %}" class="btn btn-success" id="transfer-article">Transfer Article</a>
+            <a href="#" class="btn btn-warning disabled" id="confirm-article">Confirm Transfer</a>
         </p>
     </div>
 </div>
+
 <div class="filters">
     <div class="row">
         <div  class="col-md-3" id="search_0">
@@ -42,17 +44,19 @@
             <label>User ID</label>
         </div>
         <div  class="col-md-3" id="search_3">
-            <label>Quantity</label>
+            <label>Location</label>
         </div>
     </div>
-    <div class="row">        
-        <div  class="col-md-3" id="search_3">
+    <div class="row">
+        <div  class="col-md-3" id="search_4">
+            <label>Quantity</label>
+        </div>        
+        <div  class="col-md-3" id="search_5">
             <label>Date</label>
         </div>
     </div>
 </div>
 
-<!-- /.row -->
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
@@ -67,20 +71,24 @@
                             <th>Article Number</th>
                             <th>Article Name</th>
                             <th>User ID</th>
-                            <th>Date</th>
+                            <th>Location</th>
                             <th>Quantity</th>
+                            <th>Date</th>
+                            <th class="never">PK</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for log in logs %}
+                        {% for result in results %}
                         <tr class="gradeA">
-                            <td>{{ log.article.id }}</td>
-                            <td>{{ log.article.name }}</td>
-                            <td>{{ log.user.username }}</td>
-                            <td>{{ log.date }}</td>
-                            <td>{{ log.quantity }}</td>
+                            <td>{{ result.article.id }}</td>
+                            <td>{{ result.article.name }}</td>
+                            <td>{{ result.user.username }}</td>
+                            <td>{{ result.location }}</td>
+                            <td>{{ result.quantity }}</td>
+                            <td>{{ result.date }}</td>
+                            <td>{{ result.pk }}</td>
+                        </tr>
                         {% endfor %}
-                    	
                     </tbody>
                 </table>
             </div>
@@ -101,41 +109,126 @@
     <script src ="{% static 'js/jquery.dataTables.yadcf.js' %}"></script>
     <script src ="{% static 'js/select2.full.min.js' %}"></script>
 
+
+    <!-- <script src="/path/to/moment.js"></script> -->
+    <script src="{% static 'js/moment.min.js' %}"></script>
+    <!-- <script src="/path/to/bootstrap/js/transition.js"></script> -->
+    <script src="{% static 'js/transition.min.js' %}"></script>
+    <!-- <script src="/path/to/bootstrap/js/collapse.js"></script> -->
+    <script src="{% static 'js/jquery.collapse.js' %}"></script>    
+    <!-- <script src="/path/to/bootstrap/dist/bootstrap.min.js"></script> -->   
+    <!-- <script src="/path/to/bootstrap-datetimepicker.min.js"></script> -->
+    <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
+    
     <script>
     $(document).ready(function() {
         'use strict';
         var table = $('#dataTables').DataTable({
-            responsive: true
+            responsive: true,
+            "columnDefs": [
+                {
+                    "targets": [6],
+                    "searchable": false
+                }
+            ]
 
         });
+        
+        var datepickerDefaults = {
+            showTodayButton: true,
+            showClear: true
+        };
 
         yadcf.init(table, [{
             column_number: 0,
             filter_container_id: 'search_0',
             filter_type: "multi_select",
-            select_type: 'select2'
+            select_type: 'select2', 
+            filter_default_label: "Article Number"
         },{
             column_number: 1,
             filter_container_id: 'search_1',
             filter_type: "multi_select",
-            select_type: 'select2' 
+            select_type: 'select2', 
+            filter_default_label: "Article Name" 
         },{
             column_number: 2,
             filter_container_id: 'search_2',
             filter_type: "multi_select",
-            select_type: 'select2' 
+            select_type: 'select2', 
+            filter_default_label: "User ID" 
         },{
-            column_number: 4,
+            column_number: 3,
             filter_container_id: 'search_3',
             filter_type: "multi_select",
-            select_type: 'select2' 
+            select_type: 'select2', 
+            filter_default_label: "Location" 
+        },{
+            column_number: 4,
+            filter_container_id: 'search_4',
+            filter_type: "multi_select",
+            select_type: 'select2', 
+            filter_default_label: "Quantity"
         }],
         {
             cumulative_filtering: true
         });
+    
     });
+    </script> 
 
+    <script >
+    $(document).ready(function() {
+        var table = $('#dataTables').DataTable()
+
+        var counterChecked = 0;
+        $('#dataTables tbody').on( 'click', 'tr', function () {
+            if ($(this).hasClass('active') ) {
+                counterChecked--;
+            }
+            else {
+                counterChecked++;
+            }
+            if(counterChecked > 0){
+                $("#confirm-article").removeClass('disabled');
+            } else {
+                $("#confirm-article").addClass('disabled');
+            }
+            $(this).toggleClass('active');
+
+        });
+
+        $('#confirm-article').click( function () {
+            var Things = table.rows('.active').data();
+            var strings = ""
+            for (var i = Things.length - 1; i >= 0; i--) {
+                strings = strings +"&"+ Things[i][6]
+            }
+            window.location.href = "/app/transfered-articles/confirm/" + strings;
+        });
+
+     
+    });
     </script>
 
+    <script>
+   $(document).ready(function () {
+        var datepickerDefaults = {
+            showTodayButton: true,
+            showClear: true
+        };
+        $('#dataTables').dataTable().yadcf([
+            {
+                column_number: 5,
+                filter_container_id: 'search_5',
+                filter_type: "range_date",
+                datepicker_type: 'bootstrap-datetimepicker', 
+                date_format: 'YYYY-MM-DD', 
+                select_type: 'select2', 
+                filter_plugin_options: datepickerDefaults
+            }
+        ])
+    });
+    </script>
 
 {% endblock %}

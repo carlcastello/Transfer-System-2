@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class Article(models.Model):
     id = models.IntegerField(
         default = 0,
-        primary_key = True
+        primary_key = True,
     )
     name = models.CharField(
         max_length = 100
@@ -47,7 +47,7 @@ class Transfer(models.Model):
         Article
     )
     user = models.ForeignKey(
-        User_Profile
+        User
     )
     quantity = models.IntegerField(
         default = 0
@@ -56,18 +56,15 @@ class Transfer(models.Model):
         max_length = 2,
         choices = LOCATION,
     )
+    date = models.DateTimeField(
+        'date-time transfered'
+    )
     
 class Log(models.Model):
     transfer = models.ForeignKey(
         Transfer
     )
-    date = models.DateTimeField(
-        'date-time transfered'
-    )
     status = models.BooleanField(
         default = False
     )
 
-# def Create_Profile(sender, **kwargs):
-#     if kwargs['created']:
-#         user_profile = User_Profile.objects.create(us)
