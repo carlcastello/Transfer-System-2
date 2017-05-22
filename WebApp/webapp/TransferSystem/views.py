@@ -20,7 +20,7 @@ from django.utils.decorators import method_decorator
 
 from django.db.models import Q
 
-from .models import Article, Log, Transfer, User_Profile
+from .models import Article, Transfer, Log
 from .forms import Registration_Form, Article_Creation_Form, Transfer_Form
 
 from django.views.generic import ListView
@@ -64,32 +64,6 @@ class Registered_Users(TemplateView):
         return context
 
 # response = None
-# @method_decorator(login_required, name='dispatch')
-# class Register_User(SuccessMessageMixin, CreateView):
-#     model = User
-#     template_name = "TransferContents/creation-form.html"
-#     form_class = Registration_Form
-#     success_message = "User %(username)s is succesfully created!"
-#     success_url = reverse_lazy("TransferSystem:register-user")
-    
-#     content = {
-#         'title' : 'User Registration Form',
-#     }
-
-#     def form_invalid(self, form):
-#         self.content['messages'] = form.errors
-#         return redirect('TransferSystem:register-user')
-
-#     def get_context_data(self, **kwargs):
-#         context = super(Register_User, self).get_context_data(**kwargs)
-#         for key in self.content:
-#             context[key] = self.content[key]
-
-#         return context
-
-
-
-# response = None
 @method_decorator(login_required, name='dispatch')
 class Register_User(CreateView):
     model = User
@@ -98,6 +72,7 @@ class Register_User(CreateView):
 
     content = {
         'title' : 'User Registration Form',
+        'type' : 'user_register',
         'response' : None
     }
 
@@ -107,6 +82,13 @@ class Register_User(CreateView):
 
     def form_valid(self,form):
         form.save()
+        user = self.request.user
+        username2 = form.cleaned_data["username"]
+        Log.objects.create(
+            user = user,
+            date_time = datetime.datetime.now(),
+            comment = "User " + user.username + " created user " + username2 +"."
+        )
         self.content['response'] = ("alert-success","<p><strong>Success!</strong> User is succesfully created</p>")
         return redirect('TransferSystem:register-user')
 
@@ -117,7 +99,6 @@ class Register_User(CreateView):
 
         self.content['response'] = None
         return context
-
 
 @method_decorator(login_required, name='dispatch')
 class Delete_User(DeleteView):
@@ -251,6 +232,7 @@ class Save_Article(CreateView):
 
     content = {
         'title' : 'Article Creation Form',
+        'type' : 'save_article',
         'response' : None
     }
 

@@ -4,11 +4,13 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class Article(models.Model):
-    id = models.IntegerField(
+    id = models.CharField(
         default = 0,
         primary_key = True,
+        max_length = 8,
     )
     name = models.CharField(
         max_length = 100
@@ -22,17 +24,6 @@ class Article(models.Model):
     )
     url = models.CharField(
         max_length = 200
-    )
-
-class User_Profile(models.Model):
-    user = models.OneToOneField(
-        User
-    )
-    first_name = models.CharField(
-        max_length = 100
-    )
-    last_name = models.CharField(
-        max_length = 100
     )
 
 class Transfer(models.Model):
@@ -61,10 +52,12 @@ class Transfer(models.Model):
     )
     
 class Log(models.Model):
-    transfer = models.ForeignKey(
-        Transfer
+    date_time = models.DateTimeField(
+        'date-time log'
     )
-    status = models.BooleanField(
-        default = False
+    comment = models.CharField(
+        max_length = 200
     )
-
+    user = models.ForeignKey(
+        User
+    )

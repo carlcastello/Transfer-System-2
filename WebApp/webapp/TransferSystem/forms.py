@@ -4,6 +4,8 @@ from django.contrib.auth.forms  import UserCreationForm
 from django.core.exceptions import NON_FIELD_ERRORS
 from .models import Article, Transfer
 
+import re
+
 class Registration_Form(UserCreationForm):
     first_name = forms.CharField(
         required = True
@@ -33,8 +35,10 @@ class Registration_Form(UserCreationForm):
         return user
 
 class Article_Creation_Form(forms.ModelForm):
-    id = forms.IntegerField(
+    id = forms.CharField(
         required = True,
+        max_length = 10,
+        min_length = 8,
     )
     name = forms.CharField(
         required = True
@@ -42,6 +46,22 @@ class Article_Creation_Form(forms.ModelForm):
     price = forms.DecimalField(
         required = True
     )
+
+    def clean_id(self):
+        data  = self.cleaned_data.get('id','')
+        if not data:
+            raise forms.ValidationError("Enter a valid article number")
+        
+        if data.isdigit() and len(data) == 8:
+            print(data)
+            return data
+        else:
+            data = "".join(re.findall(r"[\d']+", data))
+            if data.isdigit() and len(data) == 8:
+                return data
+            else:
+                raise forms.ValidationError("Invalid article number")
+                
     class Meta:
         model = Article
         fields = (

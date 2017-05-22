@@ -108,41 +108,9 @@
     <script src = "{% static 'js/jquery.dataTables.min.js' %}"></script>
     <script src ="{% static 'js/dataTables.bootstrap.min.js' %}"></script>
     <script src ="{% static 'js/dataTables.responsive.js' %}"></script>
+    <!-- Datatable Filter -->
     <script src ="{% static 'js/jquery.dataTables.yadcf.js' %}"></script>
     <script src ="{% static 'js/select2.full.min.js' %}"></script>
-
-    <!-- <script src="{% static 'js/metisMenu.min.js' %}"></script> -->
-    <!-- <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script> -->
-    <script>
-    $(document).ready(function() {
-        'use strict';
-        var table = $('#dataTables').DataTable({
-            responsive: true
-
-        });
-        $('#dataTables tbody').on( 'click', 'tr', function () {
-            if ($(this).hasClass('active') ) {
-                $(this).removeClass('active');
-                // $(this).removeAttr('id');
-                $("#modify-article").addClass('disabled');
-                $("#delete-article").addClass('disabled');
-                
-            }
-            else {
-                // table.$('tr.active').removeAttr('id');
-                table.$('tr.active').removeClass('active');
-                $(this).addClass('active');
-                // $(this).attr('id', 'active');
-
-                $("#modify-article").removeClass('disabled');
-                $("#delete-article").removeClass('disabled');
-
-                var article_id = parseInt(table.row( this ).data()[0]);
-                $("#modify-article").attr('href',"/app/saved-articles/modify/" + article_id);
-                $("#delete-article").attr('href',"/app/saved-articles/delete/" + article_id);
-            }
-        });
-
-    });
-    </script>    
+    <!-- Custom JS -->
+    <script src = "{% static 'js/saved-articles.js' %}"></script>
 {% endblock %}

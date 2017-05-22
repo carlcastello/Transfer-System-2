@@ -65,15 +65,4 @@
 
 
 {% block javascript %}
-<script>
-    document.formHasErrors = {% if form.errors %}true{% else %}false{% endif %};
-</script>
-
-<script>
-    $( document ).ready(function() {
-       if (document.formHasErrors) {
-           $('#add-modal').modal('toggle');
-       }
-    });
-</script>
 {% endblock %}

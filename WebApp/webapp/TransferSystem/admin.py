@@ -2,10 +2,9 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Article, Log, Transfer, User_Profile
+from .models import Article, Transfer, Log
 
 # Register your models here.
 admin.site.register(Article)
-admin.site.register(Log)
 admin.site.register(Transfer)
-admin.site.register(User_Profile)
+admin.site.register(Log)
