@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Transfer</string>
+
+
+    <string-array name="departments">
+        <item>Living Room</item>
+        <item>Kids</item>
+        <item>Workspace</item>
+        <item>Kitchen</item>
+        <item>Bedroom</item>
+    </string-array>
+    <string name="title_activity_process_number">ProcessNumberActivity</string>
+
+</resources>

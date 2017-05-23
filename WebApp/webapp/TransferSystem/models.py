@@ -48,12 +48,12 @@ class Transfer(models.Model):
         choices = LOCATION,
     )
     date = models.DateTimeField(
-        'date-time transfered'
+        auto_now_add = True
     )
     
 class Log(models.Model):
     date_time = models.DateTimeField(
-        'date-time log'
+        auto_now_add = True
     )
     comment = models.CharField(
         max_length = 200

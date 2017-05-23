@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^$', views.Login_Redirect, name = 'LoginRedirect'), 
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('TransferSystem.urls', namespace = 'TransferSystem')),
+    url(r'^api/', include('rest_auth.urls')),
 ]

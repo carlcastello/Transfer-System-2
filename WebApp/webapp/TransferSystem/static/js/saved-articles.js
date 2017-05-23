@@ -7,7 +7,7 @@ $(document).ready(function() {
     $('#dataTables tbody').on( 'click', 'tr', function () {
         if ($(this).hasClass('active') ) {
             $(this).removeClass('active');
-            // $(this).removeAttr('id');
+
             $("#modify-article").addClass('disabled');
             $("#delete-article").addClass('disabled');
             

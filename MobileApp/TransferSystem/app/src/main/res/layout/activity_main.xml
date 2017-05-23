@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:gravity="center"
+    android:background="@color/colorBackground"
+    tools:context="com.example.transfer.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/boxwithborder"
+        >
+    <EditText
+        android:layout_width="@dimen/main_button_width"
+        android:layout_height="@dimen/activity_inputbox_height"
+        android:inputType="textPersonName"
+        android:hint="UserName"
+        android:textSize="@dimen/activity_inputbox_textsize"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/user_name_input"
+        android:background="@drawable/boxwithborder"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:layout_width="@dimen/main_button_width"
+        android:layout_height="@dimen/activity_inputbox_height"
+        android:layout_marginTop="10dp"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:textSize="@dimen/activity_inputbox_textsize"
+        android:padding="10dp"
+        android:layout_below="@id/user_name_input"
+        android:id="@+id/user_password"
+        android:background="@drawable/boxwithborder"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:text="Sign In"
+        android:layout_width="@dimen/main_button_width"
+        android:layout_height="@dimen/activity_button_height"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/activity_button_textsize"
+        android:id="@+id/signInButton"
+        android:layout_below="@+id/user_password"
+        android:background="@color/colorAccent"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorWhite"
+        android:layout_marginBottom="10dp"
+        android:onClick="signInButton"/>
+    </RelativeLayout>
+
+</RelativeLayout>

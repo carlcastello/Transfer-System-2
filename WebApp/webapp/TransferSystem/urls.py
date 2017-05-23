@@ -2,9 +2,14 @@ from django.conf.urls import url
 from . import views
 from django.contrib.auth.views import login, logout
 
+from rest_framework.urlpatterns import format_suffix_patterns 
+
 urlpatterns = [
+    # For the Website HTML View
     url(r'^$', views.Home_View.as_view(), name = 'home' ),
+    
     url(r'^login/$', login, {'template_name':'login.html'}, name = 'login'),
+
     url(r'^logout/$', logout, {'next_page': '/'}, name = 'logout' ),
 
     url(r'^registered-users/$', views.Registered_Users.as_view(), name = 'registered-users'),
@@ -26,5 +31,10 @@ urlpatterns = [
 	url(r'^saved-articles/modify/(?P<article_id>\d+)/$', views.Modify_Article.as_view(), name = 'modify-article'),
 
     url(r'^saved-articles/delete/(?P<article_id>\d+)/$', views.Delete_Article.as_view(), name = 'delete-article'),
+
+    # For the Application's Rest API
+    url(r'^api/(?P<article_id>[&0-9+]+)$', views.Process_Transfer.as_view(), name = 'process-transfer'),
+
 ]
- 
+
+urlpatterns = format_suffix_patterns(urlpatterns)

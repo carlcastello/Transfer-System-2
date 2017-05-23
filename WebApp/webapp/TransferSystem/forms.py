@@ -46,6 +46,9 @@ class Article_Creation_Form(forms.ModelForm):
     price = forms.DecimalField(
         required = True
     )
+    url = forms.URLField(
+        required = False
+    )
 
     def clean_id(self):
         data  = self.cleaned_data.get('id','')
@@ -84,7 +87,6 @@ class Transfer_Form(forms.ModelForm):
         fields = (
             'article',
             'user',
-            'date',
             'location',
             'quantity',
         )
