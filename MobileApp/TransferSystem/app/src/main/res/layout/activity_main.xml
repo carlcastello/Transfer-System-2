@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:gravity="center"
     android:background="@color/colorBackground"
-    tools:context="com.example.transfer.MainActivity">
+    tools:context="com.example.transfer.Activities.MainActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
         android:textSize="@dimen/activity_inputbox_textsize"
         android:padding="10dp"
         android:layout_below="@id/user_name_input"
-        android:id="@+id/user_password"
+        android:id="@+id/user_password_input"
         android:background="@drawable/boxwithborder"
         android:layout_centerHorizontal="true"/>
 
@@ -52,7 +52,7 @@
         android:layout_marginTop="10dp"
         android:textSize="@dimen/activity_button_textsize"
         android:id="@+id/signInButton"
-        android:layout_below="@+id/user_password"
+        android:layout_below="@+id/user_password_input"
         android:background="@color/colorAccent"
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorWhite"

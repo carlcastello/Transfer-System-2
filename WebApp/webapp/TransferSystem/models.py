@@ -28,11 +28,11 @@ class Article(models.Model):
 
 class Transfer(models.Model):
     LOCATION = (
-        ('L1', 'Living Room'),
-        ('L2', 'Kids'),
-        ('L3', 'Bedrooms'),
-        ('L4', 'Office Space'),
-        ('L5', 'Kitchen'),
+        ('Living Room', 'Living Room'),
+        ('Kids', 'Kids'),
+        ('Bedrooms', 'Bedrooms'),
+        ('Office Space', 'Office Space'),
+        ('Kitchen', 'Kitchen'),
     )
     article = models.ForeignKey(
         Article

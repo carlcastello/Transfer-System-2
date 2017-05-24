@@ -3,6 +3,7 @@
 
 
     <string-array name="departments">
+        <item>----</item>
         <item>Living Room</item>
         <item>Kids</item>
         <item>Workspace</item>

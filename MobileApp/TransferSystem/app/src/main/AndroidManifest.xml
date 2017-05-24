@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,11 +18,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ReadNumberActivity"
+            android:name=".Activities.ReadNumberActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".ProcessTransferActivity"
+            android:name=".Activities.ProcessTransferActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
+
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

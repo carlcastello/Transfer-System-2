@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.transfer.ProcessTransferActivity"
+    tools:context="com.example.transfer.Activities.ProcessTransferActivity"
     android:background="@color/colorBackground">
 
     <ScrollView
@@ -37,6 +37,15 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="10dp" />
 
+        <TextView
+            android:text="Lorem Ispum 50x50"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/article_description_textview"
+            android:textSize="20dp"
+            android:textColor="@color/colorBlack"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/article_name_textview"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +53,7 @@
             android:orientation="horizontal"
             android:id="@+id/article_number_layout"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/article_name_textview"
+            android:layout_below="@id/article_description_textview"
             android:weightSum="2">
             <TextView
                 android:text="Article Number:"
@@ -52,9 +61,9 @@
                 android:layout_height="30dp"
                 android:layout_gravity="left"
                 android:layout_weight="1"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textColor="@color/colorBlack"
-                android:id="@+id/article__number_text"
+                android:id="@+id/article_number_text"
                 />
 
             <TextView
@@ -63,10 +72,10 @@
                 android:layout_height="30dp"
                 android:layout_gravity="right"
                 android:layout_weight="1"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textColor="@color/colorBlack"
                 android:textAlignment="viewEnd"
-                android:id="@+id/article__number_view"
+                android:id="@+id/article_number_view"
                 />
         </LinearLayout>
 
@@ -85,7 +94,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="left"
                 android:layout_weight="1"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textColor="@color/colorBlack"
                 />
 
@@ -95,10 +104,10 @@
                 android:layout_height="30dp"
                 android:layout_gravity="right"
                 android:layout_weight="1"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textColor="@color/colorBlack"
                 android:textAlignment="viewEnd"
-                android:id="@+id/date__text_view"
+                android:id="@+id/date_text_view"
                 />
         </LinearLayout>
 
@@ -113,10 +122,10 @@
             <TextView
                 android:text="Location:"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_gravity="left"
                 android:layout_weight="1"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textColor="@color/colorBlack"/>
 
             <Spinner
@@ -126,7 +135,7 @@
                 android:entries="@array/departments"
                 android:background="@drawable/boxwithborder"
                 android:id="@+id/spinner"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:layout_gravity="right"/>
         </LinearLayout>
 
@@ -140,10 +149,10 @@
             android:weightSum="1.0">
 
             <TextView
-                android:text="Count"
+                android:text="Quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textColor="@color/colorBlack"
                 android:layout_gravity="left"
                 android:layout_weight="0.50"
@@ -152,11 +161,11 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:background="@drawable/boxwithborder"
-                android:hint="Count"
+                android:hint="Quantity"
                 android:padding="10dp"
-                android:id="@+id/count_edit_view"
+                android:id="@+id/quantity_edit_view"
                 android:layout_weight=".5" />
         </LinearLayout>
 
